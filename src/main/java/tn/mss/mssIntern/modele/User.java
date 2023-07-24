@@ -2,23 +2,19 @@ package tn.mss.mssIntern.modele;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 @Entity
 @Table(name = "users")
-    public class User {
+    public class User implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
         private String firstName;
         private String lastName;
-    //@Temporal(TemporalType.TIMESTAMP)
-   // @JsonSerialize(as = Date.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-   // @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+
 
     private String gender;
 
@@ -34,6 +30,9 @@ import java.util.Date;
 
 
     public User() {
+    }
+
+    public User(String name, String s) {
     }
 
     public Long getId() {
@@ -58,16 +57,6 @@ import java.util.Date;
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-    //@JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_of_birth")
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getGender() {
@@ -115,7 +104,7 @@ import java.util.Date;
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                
                 ", gender='" + gender + '\'' +
                 ", username='" + username + '\'' +
                 ", emailAddress='" + email + '\'' +

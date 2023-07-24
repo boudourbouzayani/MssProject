@@ -3,6 +3,7 @@ package tn.mss.mssIntern.service;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -19,8 +20,10 @@ import java.util.UUID;
 public  class UserService {
     @Autowired(required = true)
     public UserRepository userRepository;
+
     public User addUser(User user) {
         System.out.println(user);
+       // user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -66,7 +69,17 @@ public  class UserService {
         return userRepository.findByPassword(password);
     }
 
+    public boolean authenticate(String username, String password) {
+        User user = userRepository.findByUsername(username);
 
+        if (user != null) {
+            // Compare the encoded password
+           // return passwordEncoder.matches(password, user.getPassword());
+            return password.equals(user.getPassword());
+        }
+
+        return false;
+    }
 
 }
 

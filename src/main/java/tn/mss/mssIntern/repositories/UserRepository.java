@@ -17,9 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   User findByPassword(String password);
 
- // @Query(value = "SELECT * FROM users WHERE date_of_birth::timestamp(6) without time zone = :dateOfBirth", nativeQuery = true)
-  //List<Tutorial> findByFirstName(@Param("FirstName") String FirstName);
-    List<User> findByDateOfBirth(@Param("dateOfBirth") Date dateOfBirth);
+
 }
 
 
